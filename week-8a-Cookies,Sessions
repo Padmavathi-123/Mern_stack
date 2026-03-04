@@ -16,8 +16,17 @@ app.get("/login", (req, res)=>{
     req.session.username = "Paddu";
     res.send("Session Created! Go to /profile");
 });
-
-
+app.get("/Profile", (req, res)=>{
+    if(req.session.username) {
+        res.send("Hello" + req.session.username + " ");
+    } else {
+        res.send("No session found! Please login.");
+    }
+});
+app.get("/logout", (req, res)=>{
+    req.session.destroy();
+    res.send("Session Destroyed!");
+});
 app.listen(3000,() =>{
-    console.log()
-})
+    console.log("Server running on http://localhost:3000");
+});
